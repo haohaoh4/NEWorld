@@ -18,6 +18,7 @@
 */
 
 #include "shared.h"
+#include "worldgen.h"
 
 int32_t GrassID, RockID, DirtID, SandID;
 
@@ -69,5 +70,6 @@ NWplugindata* getMyInfo(bool client)
 
 void sharedInit()
 {
+    nwRegisterChunkGenerator(generator);
     registerBlocks();
 }

@@ -17,11 +17,10 @@
 * along with NEWorld.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// The server version
+// The server side plugin
 
 #define NEWORLD_PLUGIN_SERVER_SIDE
 #include "../shared/shared.h"
-#include "worldgen.h"
 
 NWplugindata* MainPlugin = nullptr;
 
@@ -33,7 +32,6 @@ NWAPIEXPORT NWplugindata* NWAPICALL getInfo()
 // Main function
 void NWAPICALL init()
 {
-    nwRegisterChunkGenerator(generator);
     sharedInit();
 }
 

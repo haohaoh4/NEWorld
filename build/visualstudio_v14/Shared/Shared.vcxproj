@@ -315,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\shared\blockmanager.cpp" />
+    <ClCompile Include="..\..\..\src\shared\chunk.cpp" />
     <ClCompile Include="..\..\..\src\shared\event.cpp" />
     <ClCompile Include="..\..\..\src\shared\exception.cpp" />
     <ClCompile Include="..\..\..\src\shared\jsonhelper.cpp" />

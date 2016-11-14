@@ -22,7 +22,7 @@
 
 #include <common.h>
 #include <chunk.h>
-#include <atomic>
+#include <algorithm>
 #include <ratemeter.h>
 
 using ChunkGenerator = void NWAPICALL(const Vec3i*, BlockData*, int);
@@ -41,18 +41,34 @@ public:
     ChunkServer(const ChunkServer&) = delete;
     ChunkServer& operator=(const ChunkServer&) = delete;
 
-    // Build chunk
-    void build(int daylightBrightness);
-
     // Reference Counting
-    void increaseWeakRef();
-    void decreaseWeakRef();
-    void increaseStrongRef();
-    void decreaseStrongRef();
-    bool checkReleaseable() const;
+    void ChunkServer::increaseWeakRef()
+    {
+        mWeakRefrenceCount += 150;
+    }
+
+    void ChunkServer::decreaseWeakRef()
+    {
+        mWeakRefrenceCount = std::max(mWeakRefrenceCount - 1, 0);
+    }
+
+    void ChunkServer::increaseStrongRef()
+    {
+        mRefrenceCount = mWeakRefrenceCount + 1;
+    }
+
+    void ChunkServer::decreaseStrongRef()
+    {
+        mRefrenceCount = std::max(mWeakRefrenceCount - 1, 0);
+    }
+
+    bool ChunkServer::checkReleaseable() const
+    {
+        return mRefrenceCount + mWeakRefrenceCount == 0;
+    }
 
 protected:
-    std::atomic<int> mRefrenceCount, mWeakRefrenceCount;
+    int mRefrenceCount, mWeakRefrenceCount;
 };
 
 #endif // !CHUNKSERVER_H_

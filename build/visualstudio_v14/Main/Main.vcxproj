@@ -29,10 +29,12 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\src\main\client\entry.cpp" />
     <ClCompile Include="..\..\..\src\main\shared\shared.cpp" />
+    <ClCompile Include="..\..\..\src\main\shared\worldgen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\api\c\nwapi.h" />
     <ClInclude Include="..\..\..\src\main\shared\shared.h" />
+    <ClInclude Include="..\..\..\src\main\shared\worldgen.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{27404DB6-A447-47DE-A9E5-367D0D7B315D}</ProjectGuid>

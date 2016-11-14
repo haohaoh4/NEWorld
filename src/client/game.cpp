@@ -30,8 +30,10 @@ Game::Game(const std::string& name, std::shared_ptr<GameConnection> connection,
     mWindow(window), mBlocks(bm), mPlugins(pm), mWorld(name, pm, bm), mPlayer(&mWorld), mConnection(connection)
 {
     mWorld.setRenderDistance(4);
+    // TEMP CODE
     mPlayer.setPosition(Vec3d(-16.0, 48.0, 32.0));
     mPlayer.setRotation(Vec3d(-45.0, -22.5, 0.0));
+    // END TEMP CODE
 
     // Initialize rendering
     mTexture = BlockTextureBuilder::buildAndFlush();
@@ -87,6 +89,7 @@ Game::Game(const std::string& name, std::shared_ptr<GameConnection> connection,
         }
         delete chunk;
     });
+    // Connect to server
     mConnection->setWorld(&mWorld);
     mConnection->connect();
     mConnection->waitForConnected();

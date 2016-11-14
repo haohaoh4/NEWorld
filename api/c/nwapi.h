@@ -57,16 +57,16 @@ const int32_t NWAirID = 0;
 
 // NEWorld structures
 
-struct NWvec3i
-{
-    int32_t x, y, z;
-};
-
 enum
 {
     nwPluginTypeClientOnly,
     nwPluginTypeServerOnly,
     nwPluginTypeShared
+};
+
+struct NWvec3i
+{
+    int32_t x, y, z;
 };
 
 struct NWplugindata
@@ -94,8 +94,11 @@ struct NWblocktype
     int32_t hardness;
 };
 
+typedef void NWAPICALL NWchunkgenerator(const NWvec3i*, NWblockdata*, int32_t);
+
 // NEWorld APIs
 
+NWAPIENTRY size_t NWAPICALL nwRegisterChunkGenerator(NWchunkgenerator* const generator);
 NWAPIENTRY NWblockdata NWAPICALL nwGetBlock(const NWvec3i* pos);
 NWAPIENTRY int NWAPICALL nwSetBlock(const NWvec3i* pos, NWblockdata block);
 NWAPIENTRY size_t NWAPICALL nwRegisterBlock(const NWblocktype*);
@@ -114,14 +117,6 @@ struct NWblocktexture
 NWAPIENTRY NWtextureid NWAPICALL nwRegisterTexture(const char* filename);
 NWAPIENTRY void NWAPICALL nwSetBlockRenderFunc(size_t id, NWblockrenderfunc func);
 NWAPIENTRY void NWAPICALL nwUseDefaultBlockRenderFunc(size_t id, void* data);
-
-#endif
-
-#ifdef NEWORLD_PLUGIN_SERVER_SIDE
-    // Server-only APIs
-
-    typedef void NWAPICALL NWchunkgenerator(const NWvec3i*, NWblockdata*, int32_t);
-    NWAPIENTRY size_t NWAPICALL nwRegisterChunkGenerator(NWchunkgenerator* const generator);
 
 #endif
 

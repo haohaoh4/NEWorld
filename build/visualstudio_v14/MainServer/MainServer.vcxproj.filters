@@ -13,10 +13,10 @@
     <ClInclude Include="..\..\..\src\main\shared\shared.h">
       <Filter>Source\Shared</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\src\main\server\worldgen.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\api\c\nwapi.h">
+      <Filter>Source\Shared</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\main\shared\worldgen.h">
       <Filter>Source\Shared</Filter>
     </ClInclude>
   </ItemGroup>
@@ -24,10 +24,10 @@
     <ClCompile Include="..\..\..\src\main\server\entry.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\main\server\worldgen.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\src\main\shared\shared.cpp">
+      <Filter>Source\Shared</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\src\main\shared\worldgen.cpp">
       <Filter>Source\Shared</Filter>
     </ClCompile>
   </ItemGroup>

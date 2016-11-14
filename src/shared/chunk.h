@@ -20,16 +20,20 @@
 #ifndef CHUNK_H_
 #define CHUNK_H_
 
-#include <atomic>
 #include "vec3.h"
 #include "debug.h"
 #include "blockdata.h"
+
+using ChunkGenerator = void NWAPICALL(const Vec3i*, BlockData*, int);
+
+extern bool ChunkGeneratorLoaded;
+extern ChunkGenerator *ChunkGen;
 
 class Chunk
 {
 public:
     // Chunk size
-    static constexpr int SizeLog2 = 4, Size = 1 << SizeLog2; // 2 ^ 5 == 32
+    static constexpr int SizeLog2 = 4, Size = 1 << SizeLog2; // 2 ^ 4 == 16
 
     virtual ~Chunk() {}
 
@@ -83,8 +87,13 @@ public:
         mUpdated = true;
     }
 
+    // Build chunk
+    void build(int daylightBrightness);
+
 protected:
-    explicit Chunk(const Vec3i& position) : mPosition(position) {}
+    explicit Chunk(const Vec3i& position) : mPosition(position)
+    {
+    }
 
 private:
     Vec3i mPosition;

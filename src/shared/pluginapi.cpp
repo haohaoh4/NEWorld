@@ -53,6 +53,19 @@ extern "C"
     // Please don't put `using namespace` in header files (This is a source file 2333)
     using namespace PluginAPI;
 
+    NWAPIEXPORT int32_t NWAPICALL nwRegisterChunkGenerator(NWchunkgenerator* const generator)
+    {
+        if (ChunkGeneratorLoaded)
+        {
+            warningstream << "Ignoring multiple chunk generators!";
+            return 1;
+        }
+        ChunkGeneratorLoaded = true;
+        ChunkGen = generator;
+        debugstream << "Registered chunk generator";
+        return 0;
+    }
+
     NWAPIEXPORT NWblockdata NWAPICALL nwGetBlock(const NWvec3i* pos)
     {
         return convertBlockData(CurrWorld->getBlock(*pos));

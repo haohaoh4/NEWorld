@@ -54,15 +54,14 @@ void PluginManager::loadPlugin(const std::string& filename)
 
 void PluginManager::loadPlugins()
 {
-    using namespace FileSystem;
     std::string path = "./plugins/";
-    if (exists(path))
+    if (FileSystem::exists(path))
     {
-        forInDirectory(path, [this](std::string filename)
+        FileSystem::forInDirectory(path, [this](std::string filename)
         {
-            std::string suffix = filename.substr(filename.size() - std::string(LibSuffix).size());
+            std::string suffix = filename.substr(filename.size() - std::string(LibSuffix).size() - 1);
             strtolower(suffix);
-            if (suffix != LibSuffix) return; //TODO: FIXME: may ignore linux plugins
+            if (suffix != std::string(".") + LibSuffix) return;
             loadPlugin(filename);
         });
     }
