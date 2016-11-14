@@ -42,27 +42,27 @@ public:
     ChunkServer& operator=(const ChunkServer&) = delete;
 
     // Reference Counting
-    void ChunkServer::increaseWeakRef()
+    void increaseWeakRef()
     {
         mWeakRefrenceCount += 150;
     }
 
-    void ChunkServer::decreaseWeakRef()
+    void decreaseWeakRef()
     {
         mWeakRefrenceCount = std::max(mWeakRefrenceCount - 1, 0);
     }
 
-    void ChunkServer::increaseStrongRef()
+    void increaseStrongRef()
     {
         mRefrenceCount = mWeakRefrenceCount + 1;
     }
 
-    void ChunkServer::decreaseStrongRef()
+    void decreaseStrongRef()
     {
         mRefrenceCount = std::max(mWeakRefrenceCount - 1, 0);
     }
 
-    bool ChunkServer::checkReleaseable() const
+    bool checkReleaseable() const
     {
         return mRefrenceCount + mWeakRefrenceCount == 0;
     }
