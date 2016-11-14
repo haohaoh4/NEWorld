@@ -22,10 +22,23 @@
 
 #include <vector>
 #include <string>
-#define FUNCTION_ALIAS(A,B) template <typename... Args> auto B(Args&&... args) -> decltype(A(std::forward<Args>(args)...)){return A(std::forward<Args>(args)...);}
+#include <sstream>
+#include <algorithm>
 
-std::vector<std::string> split(const std::string& s, char delim);
-void trim(std::string& s);
-void strtolower(std::string& s);
+inline std::vector<std::string> split(const std::string& s, char delim)
+{
+    std::vector<std::string> elems;
+    std::stringstream ss;
+    ss.str(s);
+    std::string item;
+    while (std::getline(ss, item, delim))
+        elems.push_back(item);
+    return elems;
+};
+
+inline void strtolower(std::string& s)
+{
+    std::transform(s.begin(), s.end(), s.begin(), tolower);
+}
 
 #endif // !UTILS_H_

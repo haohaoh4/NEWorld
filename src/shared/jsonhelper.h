@@ -69,6 +69,7 @@ T getJsonValue(Json& json, T defaultValue=T())
     }
     return json;
 }
+
 class JsonSaveHelper
 {
 public:
@@ -83,5 +84,11 @@ private:
     Json& mJson;
     std::string mFilename;
 };
-Json& getSettings(const std::string& suffix = "");
+
+inline Json& getSettings(const std::string& suffix = "")
+{
+    static Json settings = readJsonFromFile(SettingsFilename + ".json");
+    static JsonSaveHelper helper(settings, SettingsFilename + ".json");
+    return settings;
+}
 #endif
